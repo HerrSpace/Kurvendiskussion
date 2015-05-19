@@ -77,6 +77,17 @@ class Function(object):
 
 		return extrema
 
+	def wendepunkte(self):
+		wendepunkte = []
+		faa = self.ableiten().ableiten()
+		faaa = faa.ableiten()
+
+		for ex in faa.nullstellen():
+			if faaa.Y(ex) != 0:
+				wendepunkte.append(ex)
+
+		return wendepunkte
+
 	def _newton(self):
 		started = self.Y(-100) > 0
 		idn = None
@@ -125,5 +136,5 @@ if __name__ == '__main__':
 #	fn = Function([2,0,1])
 	print(fn)
 	print(fn.integrieren())
-	print(fn.nullstellen())
 	print(fn.extrema())
+	print(fn.wendepunkte())
